@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Konfirmasi Transfer — Jepang Mengaji</title>
+  <link rel="icon" href="jm.jpeg">
+  <style>
+    body{font-family:sans-serif;margin:0;padding:20px;background:#f9fafb}
+    .card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:20px;max-width:720px;margin:0 auto}
+    h1{color:#16a34a}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .input{flex:1;padding:8px;border:1px solid #ccc;border-radius:6px}
+    .btn{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:6px;border:1px solid #ccc;text-decoration:none}
+    .primary{background:#16a34a;color:#fff;border-color:#16a34a}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>✅ Konfirmasi Transfer</h1>
+    <p>Isi data di bawah ini lalu kirim melalui WhatsApp atau Email.</p>
+    <div class="row"><input id="nama" class="input" placeholder="Nama lengkap"><input id="nominal" class="input" placeholder="Nominal"></div>
+    <div class="row"><input id="tanggal" type="date" class="input"><select id="bank" class="input"><option value="">Transfer ke</option><option>SMBC / Jenius</option><option>Yucho</option></select></div>
+    <textarea id="ket" class="input" rows="3" placeholder="Keterangan tambahan (opsional)"></textarea>
+    <div class="row">
+      <button class="btn primary" id="btnWA">Kirim WhatsApp</button>
+      <a class="btn" id="btnEmail" href="#">Kirim Email</a>
+    </div>
+  </div>
+  <script>
+    function teks(){
+      return "Assalamu'alaikum, saya ingin konfirmasi transfer.\n"
+        +"Nama: "+(document.getElementById('nama').value||'-')+"\n"
+        +"Nominal: "+(document.getElementById('nominal').value||'-')+"\n"
+        +"Tanggal: "+(document.getElementById('tanggal').value||'-')+"\n"
+        +"Bank: "+(document.getElementById('bank').value||'-')+"\n"
+        +"Ket: "+(document.getElementById('ket').value||'-');}
+    document.getElementById('btnWA').onclick=()=>{
+      const msg=encodeURIComponent(teks());
+      window.open("https://wa.me/817084810427?text="+msg,"_blank");}
+    document.getElementById('btnEmail').onclick=(e)=>{
+      e.currentTarget.href="mailto:jepangmengaji@gmail.com?subject=Konfirmasi Donasi&body="+encodeURIComponent(teks());}
+  </script>
+</body>
+</html>

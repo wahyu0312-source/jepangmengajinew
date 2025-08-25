@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jepang Mengaji — Beranda</title>
+  <meta name="description" content="Beranda Jepang Mengaji: carousel kegiatan (Google Drive), info terbaru, pengumuman penting, donasi & konfirmasi transfer.">
+  <link rel="icon" href="jm.jpeg" />
+  <style>
+    :root{
+      --bg:#ffffff;--bg-soft:#f8fafc;--text:#0f172a;--muted:#475569;
+      --card:#fff;--border:#e5e7eb;--primary:#ef4444;--accent:#0ea5e9;
+      --shadow:0 6px 24px rgba(2,6,23,.08)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .container{max-width:1180px;margin:0 auto;padding:0 16px}
+    /* NAVBAR */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    .nav-inner{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+    .brand img{width:36px;height:36px;border-radius:8px;border:1px solid var(--border)}
+    .nav-links{display:flex;gap:8px;align-items:center;overflow:auto}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer}
+    .btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+    .btn.ghost{background:transparent}
+    /* LAYOUT + SIDEBAR JADUL */
+    .layout{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:1024px){ .layout{grid-template-columns:260px 1fr} }
+    .sidebar{display:none}
+    @media(min-width:1024px){ .sidebar{display:block;position:sticky;top:64px;height:calc(100vh - 80px)} }
+    .sidecard{border:1px solid var(--border);border-radius:12px;background:var(--card);padding:12px;box-shadow:var(--shadow)}
+    .sidecard h3{margin:4px 0 8px;font-size:15px}
+    .sidecard a{display:block;padding:8px;border-radius:8px}
+    .sidecard a:hover{background:var(--bg-soft)}
+    /* HERO CAROUSEL */
+    .hero{padding:14px 0}
+    .carousel{position:relative;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg-soft)}
+    .frame{aspect-ratio:16/9;position:relative;width:100%}
+    .track{display:flex;height:100%;transition:transform .5s ease}
+    .slide{min-width:100%;height:100%}
+    .slide img{width:100%;height:100%;object-fit:cover}
+    .caption{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;padding:8px 10px;border-radius:10px;font-size:14px}
+    .ctrl{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 6px}
+    .ctrl button{background:rgba(0,0,0,.55);color:#fff;border:1px solid rgba(255,255,255,.25);width:40px;height:40px;border-radius:999px}
+    .dots{position:absolute;left:0;right:0;bottom:8px;display:flex;gap:6px;justify-content:center}
+    .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)}
+    .dot.active{background:#fff}
+    /* SECTIONS */
+    .section{padding:18px 0}
+    .section h2{margin:0 0 10px}
+    .updates{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .updates li{list-style:none;display:flex;gap:12px;border-top:1px solid var(--border);padding:12px}
+    .updates li:first-child{border-top:none}
+    .badge{display:inline-block;font-size:12px;border:1px solid var(--border);border-radius:999px;padding:2px 8px;background:#fff}
+    .cards{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:720px){.cards{grid-template-columns:repeat(2,1fr)}}
+    .card{border:1px solid var(--border);border-radius:12px;background:var(--card);padding:12px}
+    .muted{color:var(--muted)}
+    footer{border-top:1px solid var(--border);padding:26px 0 40px;color:var(--muted)}
+    .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .copy{font-size:.85rem;padding:.25rem .5rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg-soft)}
+    /* Admin panel */
+    details.admin{margin-top:10px}
+    details.admin textarea{width:100%;min-height:120px;border:1px solid var(--border);border-radius:10px;padding:10px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,"Liberation Mono","Courier New",monospace}
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><img src="jm.jpeg" alt="JM"><span>Jepang Mengaji</span></div>
+      <div class="nav-links">
+        <a class="btn ghost" href="#updates">Info Terbaru</a>
+        <a class="btn ghost" href="#urgent">Penting</a>
+        <a class="btn ghost" href="donasi.html">Donasi</a>
+        <a class="btn primary" href="https://www.youtube.com/@JepangMengaji" target="_blank" rel="noopener">Arsip YouTube</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container layout">
+    <!-- SIDEBAR ala web jadul (desktop) -->
+    <aside class="sidebar">
+      <div class="sidecard">
+        <h3>Navigasi</h3>
+        <a href="#updates">🆕 Info Terbaru</a>
+        <a href="#urgent">⚠️ Pengumuman Penting</a>
+        <a href="donasi.html">❤️ Donasi</a>
+        <a href="https://www.youtube.com/@JepangMengaji" target="_blank" rel="noopener">▶️ Arsip YouTube</a>
+        <hr style="border:none;border-top:1px solid var(--border);margin:8px 0">
+        <a href="https://chat.whatsapp.com/Fg2UKlhT5s9B7oYeTsMMKO?mode=ac_t" target="_blank" rel="noopener">📲 WhatsApp Group</a>
+        <a href="https://t.me/jepangmengaji_channel" target="_blank" rel="noopener">📣 Telegram Channel</a>
+        <a href="mailto:jepangmengaji@gmail.com">✉️ Email</a>
+      </div>
+    </aside>
+
+    <main>
+      <!-- HERO: Carousel + CTA Donasi -->
+      <section class="hero" aria-label="Dokumentasi kegiatan">
+        <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Foto Kegiatan">
+          <div class="frame">
+            <div class="track" id="track">
+              <!-- slides akan diisi lewat JS dari localStorage / default -->
+            </div>
+            <div class="ctrl"><button id="prev" aria-label="Sebelumnya">‹</button><button id="next" aria-label="Berikutnya">›</button></div>
+            <div class="dots" id="dots"></div>
+          </div>
+        </div>
+
+        <!-- Panel admin untuk paste link Google Drive -->
+        <details class="admin">
+          <summary class="btn">🖼️ Kelola Carousel (tempel link Google Drive / file ID)</summary>
+          <p class="muted">Tempel <strong>link berbagi</strong> atau <strong>ID file</strong> (satu per baris). Pastikan folder/file disetel <em>Anyone with the link: Viewer</em>. Klik <em>Simpan</em> → gambar langsung tampil & tersimpan di browser ini.</p>
+          <textarea id="driveInput" placeholder="Contoh:\nhttps://drive.google.com/file/d/1AbCdEfGhIjKlMn/view?usp=sharing\n1ZyXW...IDFILE\nhttps://drive.google.com/uc?export=view&id=1QwErTy..."></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn primary" id="saveDrive">Simpan</button>
+            <button class="btn" id="clearDrive">Reset ke Default</button>
+          </div>
+        </details>
+
+        <div class="section" style="padding:12px 0 0">
+          <div class="cards">
+            <div class="card">
+              <h3>❤️ Donasi Kegiatan</h3>
+              <p class="muted">Dukung dakwah: operasional, dokumentasi, dan penyelenggaraan kajian.</p>
+              <ul class="muted" style="line-height:1.7;margin:.4rem 0">
+                <li>SMBC/Jenius a.n. <em>Wahyu Setiawan</em> — <strong id="rek-jenius">90220139952</strong> <button class="copy" data-copy="#rek-jenius">Salin</button></li>
+                <li>Yucho Ginko a.n. <em>トリサンボド</em> — <strong id="rek-yucho">14660-20688191</strong> <button class="copy" data-copy="#rek-yucho">Salin</button></li>
+              </ul>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+                <a class="btn primary" href="donasi.html">💳 Link Donasi</a>
+                <a class="btn" href="instruksi-transfer.pdf" target="_blank" rel="noopener">📄 Instruksi Transfer</a>
+                <a class="btn" href="#konfirmasi">✅ Konfirmasi Transfer</a>
+              </div>
+            </div>
+            <div class="card" id="konfirmasi">
+              <h3>✅ Konfirmasi Transfer</h3>
+              <p class="muted">Kirim format singkat via WhatsApp atau Email (otomatis tersusun).</p>
+              <div style="display:grid;gap:8px;grid-template-columns:1fr 1fr">
+                <input class="btn" id="kf-nama" placeholder="Nama" style="border-radius:8px;border:1px solid var(--border)"/>
+                <input class="btn" id="kf-nominal" placeholder="Nominal (cth 100000)" style="border-radius:8px;border:1px solid var(--border)"/>
+                <input class="btn" id="kf-tanggal" type="date" style="border-radius:8px;border:1px solid var(--border)"/>
+                <select class="btn" id="kf-bank" style="border-radius:8px;border:1px solid var(--border)">
+                  <option value="">Transfer ke</option><option>SMBC / Jenius</option><option>Yucho</option>
+                </select>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                <button class="btn primary" id="btnWA">Kirim via WhatsApp</button>
+                <a class="btn" id="btnEmail" href="#">Kirim via Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UPDATE INFO TERBARU -->
+      <section id="updates" class="section">
+        <h2>Info Terbaru</h2>
+        <ul class="updates" id="updatesList">
+          <li>
+            <span class="badge">25 Agu</span>
+            <div><a href="https://www.youtube.com/@JepangMengaji" target="_blank" rel="noopener">Live malam ini 19:30 JST — Tafsir Juz 30</a><div class="muted">Channel Jepang Mengaji</div></div>
+          </li>
+          <li>
+            <span class="badge">24 Agu</span>
+            <div><a href="donasi.html">Donasi kegiatan dibuka</a><div class="muted">Operasional & dokumentasi</div></div>
+          </li>
+          <li>
+            <span class="badge">22 Agu</span>
+            <div><a href="https://www.youtube.com/@JepangMengaji" target="_blank" rel="noopener">Artikel: Adab Penuntut Ilmu (ringkas)</a><div class="muted">Baca ringkasan & tonton rekaman</div></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- PENTING / URGENT -->
+      <section id="urgent" class="section" style="background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:16px">
+        <h2>Pengumuman Penting</h2>
+        <div class="cards">
+          <article class="card"><h3>Perubahan Lokasi Kajian</h3><p class="muted">Pindah ke Masjid Otsuka Lt. 2 — mohon hadir 10 menit lebih awal.</p></article>
+          <article class="card"><h3>Kebutuhan Relawan</h3><p class="muted">Butuh 6 orang untuk dokumentasi & kebersihan. Hubungi panitia.</p></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> Jepang Mengaji</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="muted" href="https://www.youtube.com/@JepangMengaji" target="_blank" rel="noopener">▶️ Arsip YouTube</a>
+        <a class="muted" href="mailto:jepangmengaji@gmail.com">✉️ Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // tahun footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Carousel data from Google Drive links / IDs via localStorage =====
+    const LS_KEY = 'jm-hero-images';
+    function idFromDriveLink(s){
+      if(!s) return '';
+      s = String(s).trim();
+      // uc?export=view&id=FILEID
+      let m = s.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if(m) return m[1];
+      // /file/d/FILEID/
+      m = s.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if(m) return m[1];
+      // assume it's already an ID
+      if(/^[a-zA-Z0-9_-]{10,}$/.test(s)) return s;
+      return '';
+    }
+    function toViewUrl(id){ return `https://drive.google.com/uc?export=view&id=${id}`; }
+
+    function getImages(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if(raw){
+          const arr = JSON.parse(raw).filter(Boolean);
+          if(arr.length) return arr;
+        }
+      }catch(_){}
+      // default fallback (pakai logo 3x)
+      return ['jm.jpeg','jm.jpeg','jm.jpeg'];
+    }
+    function setImages(idsOrLinks){
+      const ids = idsOrLinks
+        .map(idFromDriveLink)
+        .filter(Boolean);
+      if(!ids.length){ alert('Tidak ada ID/link valid.'); return; }
+      localStorage.setItem(LS_KEY, JSON.stringify(ids));
+      buildSlides(); buildDots(); restart();
+      alert('Disimpan! Carousel diperbarui.');
+    }
+    function clearImages(){
+      localStorage.removeItem(LS_KEY);
+      buildSlides(); buildDots(); restart();
+    }
+
+    // Build UI from images
+    const track=document.getElementById('track');
+    const dotsWrap=document.getElementById('dots');
+    let idx=0, timer=null, startX=0, dragging=false;
+    function buildSlides(){
+      const imgs = getImages();
+      track.innerHTML='';
+      imgs.forEach((src,i)=>{
+        const isDriveId = /^[a-zA-Z0-9_-]{10,}$/.test(src);
+        const url = isDriveId ? toViewUrl(src) : src;
+        const fig = document.createElement('figure');
+        fig.className='slide';
+        fig.innerHTML = `<img src="${url}" alt="Kegiatan ${i+1}"><figcaption class="caption">Kegiatan ${i+1}</figcaption>`;
+        track.appendChild(fig);
+      });
+      idx=0;
+      track.style.transform='translateX(0)';
+    }
+    function buildDots(){
+      const imgs = getImages();
+      dotsWrap.innerHTML='';
+      imgs.forEach((_,i)=>{
+        const b=document.createElement('button');
+        b.className='dot'+(i===idx?' active':'');
+        b.onclick=()=>go(i,true);
+        dotsWrap.appendChild(b);
+      });
+    }
+    function go(i,user){
+      const total=getImages().length;
+      idx=(i+total)%total; track.style.transform=`translateX(${-idx*100}%)`;
+      [...dotsWrap.children].forEach((d,di)=>d.classList.toggle('active',di===idx));
+      if(user) restart();
+    }
+    function nextSlide(){ go(idx+1,false); }
+    function prevSlide(){ go(idx-1,true); }
+    function restart(){ clearInterval(timer); timer=setInterval(nextSlide, 5000); }
+    document.getElementById('next').onclick=nextSlide;
+    document.getElementById('prev').onclick=prevSlide;
+
+    // init
+    buildSlides(); buildDots(); restart();
+
+    // pause on hover
+    const frame=document.querySelector('.frame');
+    frame.addEventListener('mouseenter',()=>clearInterval(timer));
+    frame.addEventListener('mouseleave',restart);
+    // swipe
+    track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;dragging=true;clearInterval(timer)},{passive:true});
+    track.addEventListener('touchmove',e=>{if(!dragging) return; const dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${(-idx*100)+(dx/window.innerWidth)*100}%)`},{passive:true});
+    track.addEventListener('touchend',e=>{dragging=false; const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>60){ dx<0?nextSlide():prevSlide(); } else { go(idx,false);} restart();});
+
+    // Admin panel events
+    const saveBtn=document.getElementById('saveDrive');
+    const clearBtn=document.getElementById('clearDrive');
+    saveBtn.addEventListener('click', ()=>{
+      const raw=document.getElementById('driveInput').value.trim();
+      if(!raw){ alert('Tempel link atau ID dulu.'); return; }
+      const lines=raw.split(/\n+/).map(s=>s.trim()).filter(Boolean);
+      setImages(lines);
+    });
+    clearBtn.addEventListener('click', clearImages);
+
+    // ===== Copy rekening =====
+    function copySel(sel){
+      const el=document.querySelector(sel);
+      if(!el) return;
+      navigator.clipboard.writeText(el.textContent.trim()).then(()=>alert('Nomor rekening tersalin'),()=>alert('Gagal menyalin'));
+    }
+    document.addEventListener('click',e=>{
+      const btn=e.target.closest('.copy[data-copy]');
+      if(!btn) return;
+      copySel(btn.getAttribute('data-copy'));
+    });
+
+    // ===== Konfirmasi Transfer (WA/Email)
+    function buildKonfirmasi(){
+      const nama=(document.getElementById('kf-nama')||{}).value||'';
+      const nominal=(document.getElementById('kf-nominal')||{}).value||'';
+      const tgl=(document.getElementById('kf-tanggal')||{}).value||'';
+      const bank=(document.getElementById('kf-bank')||{}).value||'';
+      return [
+        "Assalamu'alaikum, saya ingin konfirmasi transfer.",
+        `Nama: ${nama||'-'}`,
+        `Nominal: ${nominal||'-'}`,
+        `Tanggal: ${tgl||'-'}`,
+        `Transfer ke: ${bank||'-'}`
+      ].join('\\n');
+    }
+    const btnWA=document.getElementById('btnWA');
+    const btnEmail=document.getElementById('btnEmail');
+    if(btnWA){ btnWA.addEventListener('click',()=>{ const msg=encodeURIComponent(buildKonfirmasi()); window.open(`https://wa.me/817084810427?text=${msg}`,'_blank','noopener'); });}
+    if(btnEmail){ btnEmail.addEventListener('click',e=>{ const body=encodeURIComponent(buildKonfirmasi()); e.currentTarget.href=`mailto:jepangmengaji@gmail.com?subject=Konfirmasi%20Transfer&body=${body}`; });
+    }
+  </script>
+</body>
+</html>

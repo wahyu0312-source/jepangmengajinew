@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Donasi — Jepang Mengaji</title>
+  <meta name="description" content="Halaman donasi Jepang Mengaji: rekening, instruksi transfer, dan konfirmasi.">
+  <link rel="icon" href="jm.jpeg" />
+  <style>
+    :root{
+      --bg:#ffffff;--bg-soft:#f8fafc;--text:#0f172a;--muted:#475569;
+      --card:#fff;--border:#e5e7eb;--primary:#ef4444;--accent:#0ea5e9;
+      --shadow:0 6px 24px rgba(2,6,23,.08)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:920px;margin:0 auto;padding:16px}
+    .muted{color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:#fff;border-radius:10px;padding:10px 14px}
+    .btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+    .btn.ghost{background:transparent}
+    .hero{padding:10px 0 4px}
+    .title{display:flex;align-items:center;gap:10px}
+    .title img{width:36px;height:36px;border-radius:8px;border:1px solid var(--border)}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .card{border:1px solid var(--border);border-radius:12px;background:var(--card);box-shadow:var(--shadow);padding:14px}
+    .grid{display:grid;gap:12px}
+    @media(min-width:860px){.grid-2{grid-template-columns:1fr 1fr}}
+    .copy{font-size:.85rem;padding:.25rem .5rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg-soft);cursor:pointer}
+    footer{border-top:1px solid var(--border);padding:20px 0 32px;color:var(--muted);margin-top:18px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="title">
+        <img src="jm.jpeg" alt="JM">
+        <div>
+          <h1 style="margin:0">Donasi</h1>
+          <div class="muted">Dukung dakwah: operasional, dokumentasi, kajian & kegiatan sosial.</div>
+        </div>
+      </div>
+      <div class="tabs">
+        <a class="btn" href="index.html">← Kembali ke Beranda</a>
+        <a class="btn primary" href="konfirmasi.html">✅ Konfirmasi Transfer</a>
+        <a class="btn" href="instruksi-transfer.pdf" target="_blank" rel="noopener">📄 Instruksi Transfer (PDF)</a>
+        <a class="btn" href="https://www.youtube.com/@JepangMengaji" target="_blank" rel="noopener">▶️ Arsip YouTube</a>
+      </div>
+    </header>
+
+    <section class="grid grid-2">
+      <article class="card">
+        <h2 style="margin:.2rem 0 .4rem">Donasi Dauroh</h2>
+        <p class="muted">Untuk penyelenggaraan dauroh: pemateri, tempat, konsumsi, dokumentasi.</p>
+        <h3>Rekening</h3>
+        <ul class="muted" style="line-height:1.7;margin:.4rem 0">
+          <li>SMBC/Jenius a.n. <em>Wahyu Setiawan</em> — <strong id="rek-jenius-a">90220139952</strong> <button class="copy" data-copy="#rek-jenius-a">Salin</button></li>
+          <li>Yucho Ginko a.n. <em>トリサンボド</em> — <strong id="rek-yucho-a">14660-20688191</strong> <button class="copy" data-copy="#rek-yucho-a">Salin</button></li>
+        </ul>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+          <a class="btn primary" href="konfirmasi.html">Konfirmasi Transfer</a>
+          <a class="btn" href="instruksi-transfer.pdf" target="_blank" rel="noopener">Instruksi Transfer</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2 style="margin:.2rem 0 .4rem">Donasi Masjid</h2>
+        <p class="muted">Renovasi/operasional, pengadaan bangunan masjid & musholla.</p>
+        <h3>Rekening</h3>
+        <ul class="muted" style="line-height:1.7;margin:.4rem 0">
+          <li>SMBC/Jenius a.n. <em>Wahyu Setiawan</em> — <strong id="rek-jenius-b">90220139952</strong> <button class="copy" data-copy="#rek-jenius-b">Salin</button></li>
+          <li>Yucho Ginko a.n. <em>トリサンボド</em> — <strong id="rek-yucho-b">14660-20688191</strong> <button class="copy" data-copy="#rek-yucho-b">Salin</button></li>
+        </ul>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+          <a class="btn primary" href="konfirmasi.html">Konfirmasi Transfer</a>
+          <a class="btn" href="instruksi-transfer.pdf" target="_blank" rel="noopener">Instruksi Transfer</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:12px">
+      <h2 style="margin:.2rem 0 .4rem">Pertanyaan & Bantuan</h2>
+      <p class="muted">Hubungi CP Panitia: WhatsApp <a href="https://wa.me/817084810427" target="_blank" rel="noopener">+81 70-8481-0427</a> · Email <a href="mailto:jepangmengaji@gmail.com">jepangmengaji@gmail.com</a></p>
+    </section>
+
+    <footer>© <span id="year"></span> Jepang Mengaji</footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    function textFromSelector(sel){const el=document.querySelector(sel);return el?el.textContent.trim():"";}
+    document.addEventListener('click', async (e)=>{
+      const b=e.target.closest('.copy[data-copy]'); if(!b) return;
+      const t=textFromSelector(b.getAttribute('data-copy'));
+      try{await navigator.clipboard.writeText(t); b.textContent='Tersalin'; setTimeout(()=>b.textContent='Salin',1000);}catch(_){}
+    });
+  </script>
+</body>
+</html>
